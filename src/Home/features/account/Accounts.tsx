@@ -9,32 +9,37 @@ import AccountSection from "./Components/AccountSection";
 import SpendingPower from "./Components/SpendingPower";
 import { ReactComponent as TransferSVG } from "../../../assets/transfer.svg";
 import { theme } from "../../../theme";
+import Loading from "../../Components/Loading";
 
 export default function Accounts() {
     const key = useContext(KeyContext);
-    const { data, error } = useHomeData(key);
+    const { data, error, isLoading } = useHomeData(key);
 
     // Show loading state if data is not yet available
-    if (!data) {
-        return (
-            <Box className={styles.Main}>
-                <Typography>Loading</Typography>
-            </Box>
-        );
+    if (isLoading) {
+        return <Loading />;
     }
 
     // Consider a filter instead of this find functinoality..
     // Get the accounts we want off the data
-    const checkingAccount = data.accounts.find((account) => account.type === AccountType.CHECKING);
-    const earlyIncomeAccount = data.accounts.find(
+
+    // Filter accounts to only show accounts that are the correct types
+    const validAccounts = data?.accounts.filter((account) => {
+        return account.type === AccountType.CHECKING || account.type === AccountType.EARLY_INCOME;
+    });
+
+    // If (there are not exaclty 2 accounts and they are not the correct types), show an error
+    const checkingAccount = validAccounts?.find((account) => account.type === AccountType.CHECKING);
+    const earlyIncomeAccount = validAccounts?.find(
         (account) => account.type === AccountType.EARLY_INCOME
     );
 
-    // check them for null
-    if (!checkingAccount || !earlyIncomeAccount) {
+    if (!checkingAccount || !earlyIncomeAccount || validAccounts?.length !== 2) {
         return (
             <Box className={styles.Main}>
-                <Typography>Missing account data</Typography>
+                <Typography variant="BodyLgReg" color={theme.palette.type.tertiary}>
+                    Missing or invalid account data
+                </Typography>
             </Box>
         );
     }

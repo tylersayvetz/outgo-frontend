@@ -4,14 +4,31 @@ import React, { useContext } from "react";
 import { useHomeData } from "../../../api";
 import { KeyContext } from "../../../lib/KeyContext";
 import { theme } from "../../../theme";
+import Error from "../../Components/Error";
+import Loading from "../../Components/Loading";
 import HScrollContainer from "./Components/HScrollContainer";
 import styles from "./Transactions.module.scss";
 
 export default function Transactions() {
     const key = useContext(KeyContext);
-    const { data, error } = useHomeData(key);
+    const { data, error, isLoading } = useHomeData(key);
 
-    if (!data) return null;
+    let component;
+    if (error) {
+        component = <Error message="Missing or invalid transaction data" />;
+    } else if (isLoading) {
+        component = <Loading />;
+    } else if (data) {
+        if (data.recentTransactions.length === 0) {
+            component = <HScrollContainer transactions={data.recentTransactions} />;
+        } else {
+            component = (
+                <Typography variant="BodySmReg" color={theme.palette.type.tertiary}>
+                    No transactions yet
+                </Typography>
+            );
+        }
+    }
 
     return (
         <Box mb={5}>
@@ -36,15 +53,7 @@ export default function Transactions() {
                     </Button>
                 </Box>
             </Box>
-            {data.recentTransactions.length > 0 ? (
-                <HScrollContainer transactions={data.recentTransactions} />
-            ) : (
-                <Box mt={4} mb={4}>
-                    <Typography variant="BodySmReg" color={theme.palette.type.tertiary}>
-                        No transactions yet
-                    </Typography>
-                </Box>
-            )}
+            {component}
         </Box>
     );
 }

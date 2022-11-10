@@ -8,18 +8,28 @@ import { theme } from "../../../theme";
 import InvoiceDraftSummaryCard from "./Components/InvoiceDraftSummaryCard";
 import InvoiceAwaitingPaySummaryCard from "./Components/InvoiceAwaitingPaySummaryCard";
 import InvoicePaidSummaryCard from "./Components/InvoicePaidSummaryCard";
+import Error from "../../Components/Error";
+import Loading from "../../Components/Loading";
 
 export default function Invoices() {
     const key = useContext(KeyContext);
-    const { data, error } = useHomeData(key);
+    const { data, error, isLoading } = useHomeData(key);
 
-    if (!data) {
-        return <div>Loading...</div>;
-    }
-    const invoiceSumamryKeys = ["draftSummary", "awaitingPaymentSummary", "paidSummary"];
-    // If the required keys arent present, return an error.
-    if (!Object.keys(data.invoiceSummary).every((key) => invoiceSumamryKeys.includes(key))) {
-        return <div>Error</div>;
+    let component;
+    if (error) {
+        component = <Error message="Missing or invalid invoice data" />;
+    } else if (isLoading) {
+        component = <Loading />;
+    } else if (data) {
+        component = (
+            <Box className={styles.InvoiceContainer}>
+                <InvoiceDraftSummaryCard summary={data.invoiceSummary.draftSummary} />
+                <InvoiceAwaitingPaySummaryCard
+                    summary={data.invoiceSummary.awaitingPaymentSummary}
+                />
+                <InvoicePaidSummaryCard summary={data.invoiceSummary.paidSummary} />
+            </Box>
+        );
     }
 
     return (
@@ -37,14 +47,7 @@ export default function Invoices() {
             </Box>
 
             <Divider />
-
-            <Box className={styles.InvoiceContainer}>
-                <InvoiceDraftSummaryCard summary={data.invoiceSummary.draftSummary} />
-                <InvoiceAwaitingPaySummaryCard
-                    summary={data.invoiceSummary.awaitingPaymentSummary}
-                />
-                <InvoicePaidSummaryCard summary={data.invoiceSummary.paidSummary} />
-            </Box>
+            {component}
         </Box>
     );
 }
