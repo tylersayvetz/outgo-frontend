@@ -11,6 +11,11 @@ export const fetchHomeData = async (responseKey: number): Promise<AxiosResponse<
 // React Query pattern to make custom hook for handling data fetching and caching.
 export const useHomeData = (responseKey: number) => {
     return useQuery<HomeData>(["home", responseKey], async () => {
+        // Quick handling of times when input is not number
+        if (typeof responseKey !== "number") {
+            throw new Error("responseKey must be a number");
+        }
+
         const data = await fetchHomeData(responseKey);
         return data.data;
     });

@@ -1,0 +1,36 @@
+.Wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    .Item {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        max-width: 140px;
+        min-width: 130px;
+        border-width: 1px;
+        margin-right: -1px;
+        border-style: solid;
+        scrollbar-width: 0;
+        height: 100px;
+        scrollbar-color: transparent transparent;
+        padding: 25px;
+    }
+  }
+  
+  .LineItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: "nowrap";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+
+  .Truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

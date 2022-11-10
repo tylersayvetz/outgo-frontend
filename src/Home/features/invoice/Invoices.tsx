@@ -1,0 +1,50 @@
+import { Box, Button, Divider, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import { useHomeData } from "../../../api";
+import { KeyContext } from "../../../lib/KeyContext";
+import styles from "./Invoices.module.scss";
+import { ReactComponent as PlusSVG } from "../../../assets/plus.svg";
+import { theme } from "../../../theme";
+import InvoiceDraftSummaryCard from "./Components/InvoiceDraftSummaryCard";
+import InvoiceAwaitingPaySummaryCard from "./Components/InvoiceAwaitingPaySummaryCard";
+import InvoicePaidSummaryCard from "./Components/InvoicePaidSummaryCard";
+
+export default function Invoices() {
+    const key = useContext(KeyContext);
+    const { data, error } = useHomeData(key);
+
+    if (!data) {
+        return <div>Loading...</div>;
+    }
+    const invoiceSumamryKeys = ["draftSummary", "awaitingPaymentSummary", "paidSummary"];
+    // If the required keys arent present, return an error.
+    if (!Object.keys(data.invoiceSummary).every((key) => invoiceSumamryKeys.includes(key))) {
+        return <div>Error</div>;
+    }
+
+    return (
+        <Box>
+            <Box className={styles.TopBar}>
+                <Typography variant="BodySmBold" color={theme.palette.type.primary}>
+                    Invoices
+                </Typography>
+                <Button variant="outlined" style={{ borderRadius: 12 }}>
+                    <PlusSVG style={{ marginRight: 10 }} />
+                    <Typography variant="InteractiveSm" color={theme.palette.type.primary}>
+                        New
+                    </Typography>
+                </Button>
+            </Box>
+
+            <Divider />
+
+            <Box className={styles.InvoiceContainer}>
+                <InvoiceDraftSummaryCard summary={data.invoiceSummary.draftSummary} />
+                <InvoiceAwaitingPaySummaryCard
+                    summary={data.invoiceSummary.awaitingPaymentSummary}
+                />
+                <InvoicePaidSummaryCard summary={data.invoiceSummary.paidSummary} />
+            </Box>
+        </Box>
+    );
+}

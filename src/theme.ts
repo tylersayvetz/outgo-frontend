@@ -20,12 +20,45 @@ export const theme = createTheme({
                 }
             }
         },
-        MuiButton: {
+        MuiDivider: {
             styleOverrides: {
                 root: {
+                    backgroundColor: "#E5E3DE",
+                    height: "1px",
+                    border: "none",
+                    marginTop: "8px"
+                }
+            }
+        },
+        MuiButton: {
+            styleOverrides: {
+                outlined: {
+                    color: "#010700",
+                    backgroundColor: "transparent",
+                    border: "1px solid #ADAAA6",
+                    boxShadow: "none",
+                    borderRadius: 20,
+                    textTransform: "none",
+                    padding: "6px 12px",
+                    "&:hover": {
+                        border: "1px solid #ADAAA6",
+                        boxShadow: "none",
+                        backgroundColor: "transparent"
+                    }
+                },
+                text: {
+                    whiteSpace: "nowrap",
+                    padding: 0,
+                    paddingBottom: "10px",
+                    color: "#010700",
+                    backgroundColor: "transparent",
+                    borderBottom: "2px solid #010700",
+                    borderRadius: 0,
+                    textTransform: "none",
                     boxShadow: "none",
                     "&:hover": {
-                        boxShadow: "none"
+                        boxShadow: "none",
+                        backgroundColor: "transparent"
                     }
                 }
             }
@@ -211,6 +244,18 @@ export const theme = createTheme({
 /*                                       Module Augmentation                                      */
 /* ---------------------------------------------------------------------------------------------- */
 declare module "@mui/material/styles" {
+    interface Components {
+        // MuiButton: {
+        //     variants: [
+        //         {
+        //             props: {
+        //                 variant: "contained" | "outlined" | "text" | "secondary" | "tertiary";
+        //             };
+        //         }
+        //     ];
+        // };
+    }
+
     interface Theme {
         palette: {
             brand: {
@@ -328,6 +373,20 @@ declare module "@mui/material/styles" {
         InteractiveMdUnderline: React.CSSProperties;
         InteractiveSm: React.CSSProperties;
         InteractiveSmUnderline: React.CSSProperties;
+    }
+
+    interface ExtendedButtonProps {
+        variant: "contained" | "outlined" | "text" | "secondary" | "tertiary";
+    }
+}
+
+declare module "@mui/material/Button" {
+    interface ButtonPropsVariantOverrides {
+        contained: true;
+        outlined: true;
+        text: true;
+        secondary: true;
+        tertiary: true;
     }
 }
 

@@ -1,0 +1,24 @@
+
+.AccountCard {
+    margin: -1px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 20px;
+    height: 100px;
+
+
+}
+.Active {
+}
+
+.OverText {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -32px;
+    width: fit-content;
+    padding-inline: 5px;
+    display: flex;
+    margin-bottom: -22px;
+}

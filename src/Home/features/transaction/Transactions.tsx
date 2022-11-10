@@ -1,0 +1,50 @@
+import { Button, Divider, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useContext } from "react";
+import { useHomeData } from "../../../api";
+import { KeyContext } from "../../../lib/KeyContext";
+import { theme } from "../../../theme";
+import HScrollContainer from "./Components/HScrollContainer";
+import styles from "./Transactions.module.scss";
+
+export default function Transactions() {
+    const key = useContext(KeyContext);
+    const { data, error } = useHomeData(key);
+
+    if (!data) return null;
+
+    return (
+        <Box mb={5}>
+            <Box className={styles.HeadContainer}>
+                <Box
+                    mr={2}
+                    style={{
+                        width: "100%",
+                        borderBottom: "2px solid",
+                        borderColor: theme.palette.backgroundColor.tertiary
+                    }}
+                >
+                    <Typography variant="InteractiveSm" color={theme.palette.type.primary}>
+                        Transactions
+                    </Typography>
+                </Box>
+                <Box display={"flex"}>
+                    <Button variant="text">
+                        <Typography variant="InteractiveSm" color={theme.palette.type.primary}>
+                            View all
+                        </Typography>
+                    </Button>
+                </Box>
+            </Box>
+            {data.recentTransactions.length > 0 ? (
+                <HScrollContainer transactions={data.recentTransactions} />
+            ) : (
+                <Box mt={4} mb={4}>
+                    <Typography variant="BodySmReg" color={theme.palette.type.tertiary}>
+                        No transactions yet
+                    </Typography>
+                </Box>
+            )}
+        </Box>
+    );
+}
