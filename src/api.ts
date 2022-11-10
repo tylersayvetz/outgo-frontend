@@ -13,9 +13,11 @@ export const useHomeData = (responseKey: number) => {
     return useQuery<HomeData>(["home", responseKey], async () => {
         // Quick handling of times when input is not number
         if (typeof responseKey !== "number") {
+            console.log("responseKey is not a number", responseKey, responseKey === "");
             throw new Error("responseKey must be a number");
         }
 
+        console.log("Fetching data...", responseKey);
         const data = await fetchHomeData(responseKey);
         return data.data;
     });
