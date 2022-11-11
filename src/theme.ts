@@ -20,6 +20,30 @@ export const theme = createTheme({
                 }
             }
         },
+        MuiBottomNavigationAction: {
+            styleOverrides: {
+                label: {
+                    color: "#656360",
+                    "&.Mui-selected": { color: "#010700" },
+                    fontFamily: "Rubik, sans-serif",
+                    fontWeight: 400,
+                    fontSize: 16,
+                    lineHeight: "20px",
+                    letterSpacing: "0em",
+                    textAlign: "left"
+                },
+                root: {
+                    color: "white"
+                }
+            }
+        },
+        MuiBottomNavigation: {
+            styleOverrides: {
+                root: {
+                    color: "white"
+                }
+            }
+        },
         MuiDivider: {
             styleOverrides: {
                 root: {

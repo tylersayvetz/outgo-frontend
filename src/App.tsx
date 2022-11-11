@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import { ThemeProvider } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Paper, ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import HomeScreen from "./Home/HomeScreen";
 import { theme } from "./theme";
+import { NavBar } from "./Home/Components/NavBar";
 
 function App() {
     const queryClient = new QueryClient({ defaultOptions: {} });
@@ -12,11 +13,14 @@ function App() {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
                 <div className="application">
-                    <Helmet>
-                        <style>{`body {background-color: ${theme.palette.backgroundColor.secondary}`}</style>
-                    </Helmet>
+                    <HelmetProvider>
+                        <Helmet>
+                            <style>{`body {background-color: ${theme.palette.backgroundColor.secondary}`}</style>
+                        </Helmet>
+                    </HelmetProvider>
                 </div>
                 <HomeScreen />
+                <NavBar />
             </ThemeProvider>
         </QueryClientProvider>
     );

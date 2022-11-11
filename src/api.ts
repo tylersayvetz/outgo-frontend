@@ -17,7 +17,6 @@ export const useHomeData = (responseKey: number) => {
             throw new Error("responseKey must be a number");
         }
 
-        console.log("Fetching data...", responseKey);
         const data = await fetchHomeData(responseKey);
         return data.data;
     });
