@@ -1,6 +1,9 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { theme } from "../../theme";
 
+import { ReactComponent as BalanceSVGInactive } from "../../assets/balance-in.svg";
+import { ReactComponent as InvoicesSVGInactive } from "../../assets/invoice-in.svg";
+import { ReactComponent as UserSVGInactive } from "../../assets/user-in.svg";
 import { ReactComponent as BalanceSVG } from "../../assets/balance.svg";
 import { ReactComponent as InvoicesSVG } from "../../assets/invoice.svg";
 import { ReactComponent as UserSVG } from "../../assets/user.svg";
@@ -23,9 +26,18 @@ export function NavBar() {
                     setValue(newValue);
                 }}
             >
-                <BottomNavigationAction label="Accounts" icon={<BalanceSVG />} />
-                <BottomNavigationAction label="Invoices" icon={<InvoicesSVG />} />
-                <BottomNavigationAction label="Profile" icon={<UserSVG />} />
+                <BottomNavigationAction
+                    label="Balance"
+                    icon={value === 0 ? <BalanceSVG /> : <BalanceSVGInactive />}
+                />
+                <BottomNavigationAction
+                    label="Invoices"
+                    icon={value === 1 ? <InvoicesSVG /> : <InvoicesSVGInactive />}
+                />
+                <BottomNavigationAction
+                    label="Profile"
+                    icon={value == 2 ? <UserSVG /> : <UserSVGInactive />}
+                />
             </BottomNavigation>
         </Paper>
     );

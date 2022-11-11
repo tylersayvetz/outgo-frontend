@@ -24,10 +24,11 @@ export const theme = createTheme({
             styleOverrides: {
                 label: {
                     color: "#656360",
-                    "&.Mui-selected": { color: "#010700" },
+                    transition: "none",
+                    "&.Mui-selected": { color: "#010700", fontSize: "16px" },
                     fontFamily: "Rubik, sans-serif",
                     fontWeight: 400,
-                    fontSize: 16,
+                    fontSize: "16px",
                     lineHeight: "20px",
                     letterSpacing: "0em",
                     textAlign: "left"
