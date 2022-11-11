@@ -40,7 +40,7 @@ export default function HomeScreen() {
 
     return (
         <Container>
-            <Box display={"flex"} flexDirection="row" alignItems="center" mb={4}>
+            <Box display={"flex"} flexDirection="row" alignItems="center" mb={4} pb={7}>
                 <Controller
                     name="key"
                     control={control}
