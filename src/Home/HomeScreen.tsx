@@ -19,7 +19,11 @@ import { Controller, useForm } from "react-hook-form";
 export default function HomeScreen() {
     const [key, setKey] = React.useState(0);
 
-    const { control, handleSubmit, setError } = useForm({});
+    const { control, handleSubmit, setError } = useForm({
+        defaultValues: {
+            key: 0
+        }
+    });
 
     const onSumbit = (data: any) => {
         console.log(parseInt(data.key));

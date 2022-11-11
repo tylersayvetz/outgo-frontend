@@ -18,16 +18,14 @@ export default function Transactions() {
         component = <Error message="Missing or invalid transaction data" />;
     } else if (isLoading) {
         component = <Loading />;
-    } else if (data) {
-        if (data.recentTransactions.length === 0) {
-            component = <HScrollContainer transactions={data.recentTransactions} />;
-        } else {
-            component = (
-                <Typography variant="BodySmReg" color={theme.palette.type.tertiary}>
-                    No transactions yet
-                </Typography>
-            );
-        }
+    } else if (data && data.recentTransactions.length !== 0) {
+        component = <HScrollContainer transactions={data.recentTransactions} />;
+    } else {
+        component = (
+            <Typography variant="BodySmReg" color={theme.palette.type.tertiary}>
+                No transactions yet
+            </Typography>
+        );
     }
 
     return (
