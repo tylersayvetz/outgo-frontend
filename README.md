@@ -6,14 +6,14 @@ https://codesandbox.io/p/github/tylersayvetz/outgo-frontend/main?file=%2FREADME.
 
 ## Must read
 
-To run this project successfully in the browser you will need to install a browser extension to allow CORS. Specifically, `(Access-Control-Allow-Origin: *)` must be added to the response headers in all requests to the API. Here are a few extensions that will get the job done:
+To run this project successfully in the browser you will need to install a browser extension to allow CORS or update the API CORS policy. Currently, `(Access-Control-Allow-Origin: *)` must be added to the response headers in all requests. Here are a few extensions that will get the job done right away before the API policy can be updated:
 
 * Chrome: https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en
 * Edge: https://microsoftedge.microsoft.com/addons/detail/allow-cors-accesscontro/bhjepjpgngghppolkjdhckmnfphffdag?hl=en-US
 
 Similar extensions can be found for other browsers.
 
-### Before installing one of the extensions or updating the API's CORS policy, the project will show it's error state / missing data state, as it is receiving 400's from the API. 
+### Before installing one of the extensions or updating the API's CORS policy, the project will show it's error state / missing data state beacuse it is receiving 400's from the API.
 # Dev Notes:
 
 ## Errors / Discrepancies
