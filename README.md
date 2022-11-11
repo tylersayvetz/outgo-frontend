@@ -31,10 +31,6 @@ Similar extensions can be found for other browsers.
 * decided not to make a validator layer or a data cleaning layer. UI will be robust to handle bad or incomplete data.
 * spending power is the dynamic sum of accounts with checking and early_incom properties.
 
-## todo
-* add filtering to accounts list
-* add validation to screen form input
-
 
 ## Holistic approach big ticket items.
 * Data display
